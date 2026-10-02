@@ -29,6 +29,56 @@ table{width:100%;border-collapse:collapse;min-width:540px}.tablewrap{overflow:au
 
 .zoom-fixed{width:100%;max-width:360px;margin:0 auto;min-height:340px;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}.zoom-fixed .zoom-stage{flex:0 0 150px;height:150px;min-height:150px}.zoom-fixed .zoom-controls{min-height:48px}.zoom-fixed #gameStatus{min-height:38px;text-align:center;padding:8px 2px}.zoom-fixed #gameGo{align-self:center;min-width:150px}.zoom-fixed .zoom-controls button{min-width:110px}
 .zoom-stage{width:100%;max-width:320px;height:150px;margin:12px auto;border:1px solid #39415c;border-radius:16px;background:radial-gradient(circle at center,#202b4a,#090d19);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}.zoom-target{font-size:26px;transition:transform .35s ease;user-select:none}.zoom-controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}.zoom-controls button{padding:10px 14px;border-radius:10px;border:1px solid #414a66;background:#151d31;color:#fff;font-weight:700;cursor:pointer}.zoom-controls button:disabled{opacity:.45}.game-action{padding:10px 14px;border-radius:10px;border:0;background:#f6c453;color:#111;font-weight:800;cursor:pointer;margin:4px}.game-input{padding:10px;border-radius:9px;background:#101728;border:1px solid #414a66;color:white;width:90px}
+
+/* Responsive layout repair: phone and laptop */
+html{width:100%;max-width:100%;overflow-x:hidden}
+body{width:100%;max-width:100%;overflow-x:hidden}
+.wrap{width:min(1120px, calc(100% - 32px));min-width:0}
+.grid,.grid>*{min-width:0;max-width:100%}
+.topin{min-width:0;flex-wrap:wrap}
+.actions{min-width:0;max-width:100%;align-items:center}
+.pill{min-width:0;overflow-wrap:anywhere}
+.section,.hero{min-width:0;max-width:100%}
+.tablewrap{display:block;width:100%;max-width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border-radius:10px}
+.tablewrap table{width:100%;min-width:560px;table-layout:auto}
+.modal{overflow-y:auto;align-items:center}
+.modal .card{max-height:calc(100dvh - 32px);overflow-y:auto;min-width:0}
+.zoom-fixed{width:100%;max-width:360px;min-width:0;min-height:340px}
+.zoom-fixed .zoom-stage{width:100%;max-width:320px;flex:0 0 150px}
+@media(max-width:620px){
+ .wrap{width:calc(100% - 24px)}
+ .topin{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:12px 0}
+ .topin>.logo{font-size:20px;line-height:1.2}
+ .actions{display:flex;flex-wrap:wrap;gap:7px}
+ .actions .pill,.actions .btn{padding:8px 10px;font-size:14px}
+ .hero{padding:14px 0}
+ .card{padding:14px;border-radius:16px}
+ .two{grid-template-columns:minmax(0,1fr)}
+ .games{grid-template-columns:minmax(0,1fr)}
+ .mini{min-height:130px}
+ .choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .choices .violet{grid-column:span 2}
+ .amounts{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .roundhead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .roundhead .box{min-width:0;overflow-wrap:anywhere}
+ #periodText{font-size:12px;word-break:break-all}
+ .result{width:104px;height:104px;font-size:44px}
+ .title{gap:8px;flex-wrap:wrap}
+ .tablewrap table{min-width:560px}
+ .modal{padding:12px}
+ .modal .card{width:100%;max-width:420px}
+ .zoom-fixed{min-height:350px}
+ .zoom-fixed .zoom-controls{gap:6px}
+ .zoom-fixed .zoom-controls button{min-width:0;flex:1;padding:10px 8px;font-size:13px}
+ .zoom-fixed #gameGo{width:100%}
+}
+@media(min-width:621px) and (max-width:900px){
+ .wrap{width:calc(100% - 32px)}
+ .games{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:901px){
+ .games{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 </style>
 </head>
 <body>
