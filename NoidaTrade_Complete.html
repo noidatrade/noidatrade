@@ -17,13 +17,6 @@ button,input{font:inherit}.hidden{display:none!important}.wrap{width:min(1120px,
 .choices{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:16px 0}.choice{border:0;color:white;font-weight:900;padding:13px 5px;border-radius:13px}.choice.active{outline:2px solid white;box-shadow:0 0 0 4px rgba(255,255,255,.08)}
 .red{background:#dc2626}.green{background:#16a34a}.violet{background:#9333ea}.big{background:#2563eb}.small{background:#475569}
 .amounts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}.amount{padding:10px;border:1px solid #333;border-radius:11px;background:#171717;color:white}.amount.active{border-color:var(--gold);color:var(--gold)}
-.quick-bets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0 0 12px}
-.quick-bet{min-width:0;padding:10px 4px;border:1px solid #57451e;border-radius:10px;background:#211d14;color:var(--gold);font-size:13px;display:flex;flex-direction:column;gap:3px}
-.quick-bet b{font-size:15px;color:#fff}
-.quick-bet.active{border-color:var(--gold);background:#342914;box-shadow:0 0 0 1px var(--gold) inset}
-.custom-amount-label{display:block;margin:0 0 6px;color:#bbb;font-size:13px}
-.custom-amount{width:100%;box-sizing:border-box;padding:12px;border:1px solid #57451e;border-radius:10px;background:#111;color:#fff;font:inherit;margin-bottom:12px}
-
 .trade{width:100%;padding:14px;border:0;border-radius:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));font-weight:900;color:#111}
 .result{width:130px;height:130px;margin:22px auto 12px;border-radius:50%;display:grid;place-items:center;border:7px solid #202020;font-size:55px;font-weight:900}.tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.tag{background:#171717;border:1px solid #2d2d2d;border-radius:999px;padding:8px 12px}
 .section{padding:0 0 20px}.title{display:flex;justify-content:space-between;align-items:center;margin:10px 0}.title h2{font-size:20px;margin:0}
@@ -154,14 +147,6 @@ body{width:100%;max-width:100%;overflow-x:hidden}
       <div class="amounts">
         <button class="amount active" data-amount="10">10</button><button class="amount" data-amount="50">50</button><button class="amount" data-amount="100">100</button><button class="amount" data-amount="500">500</button><button class="amount" data-amount="1000">1000</button>
       </div>
-      <div class="quick-bets" aria-label="Quick prediction amounts">
-        <button type="button" class="quick-bet" data-quick-amount="100">10× <b>100</b></button>
-        <button type="button" class="quick-bet" data-quick-amount="200">20× <b>200</b></button>
-        <button type="button" class="quick-bet" data-quick-amount="400">40× <b>400</b></button>
-        <button type="button" class="quick-bet" data-quick-amount="500">50× <b>500</b></button>
-      </div>
-      <label class="custom-amount-label" for="customAmount">Or enter amount</label>
-      <input id="customAmount" class="custom-amount" type="number" inputmode="numeric" min="1" step="1" placeholder="Type coins (e.g. 75)" aria-label="Custom prediction amount">
       <button id="predictBtn" class="trade">Place Prediction</button>
       <div id="pickHint" class="muted" style="margin-top:9px">Choose Red / Green / Violet / Big / Small.</div>
     </div>
@@ -217,7 +202,7 @@ function showLatest(r){$("#latestNum").textContent=r.number;$("#latestColor").te
 function modal(icon,title,text,color){$("#modalIcon").textContent=icon;$("#modalTitle").textContent=title;$("#modalTitle").style.color=color||"#f6c453";$("#modalText").innerHTML=text;$("#modal").classList.remove("hidden")}
 function settle(){const current=periodAt(),u=me();if(!u)return;for(const p of db.predictions.filter(x=>x.username===u.username&&x.status==="PENDING"&&x.period!==current)){const r=ensureRound(p.period),ok=win(p,r);p.status=ok?"WIN":"LOST";if(ok)u.coins+=p.amount*2;save();modal(ok?"🏆":"💥",ok?"WIN":"LOSS",`Period ${p.period} • Result ${r.number}/${r.color}/${r.size} • ${ok?`+${p.amount} net coins`:`-${p.amount} coins`}`,ok?"#22c55e":"#ef4444")}refresh()}
 function tick(){const now=Date.now(),p=periodAt(now),left=60-(Math.floor(now/1000)%60);$("#periodText").textContent=p;$("#timerText").textContent=`00:${String(left).padStart(2,"0")}`;if(lastPeriod&&lastPeriod!==p){ensureRound(lastPeriod);settle()}lastPeriod=p;showLatest(ensureRound(periodAt(now-60000)))}
-function place(){const u=me(),p=periodAt(),custom=$("#customAmount")?$("#customAmount").value.trim():"";if(custom!==""){const n=Number(custom);if(!Number.isInteger(n)||n<1)return $("#pickHint").textContent="Enter a valid whole-number amount.";selectedAmount=n;}if(!selectedChoice)return $("#pickHint").textContent="First choose a prediction.";if(db.predictions.some(x=>x.username===u.username&&x.period===p&&x.status==="PENDING"))return $("#pickHint").textContent="You already predicted in this period.";if(u.coins<selectedAmount)return $("#pickHint").textContent="Not enough coins.";u.coins-=selectedAmount;db.predictions.unshift({id:Date.now(),username:u.username,period:p,choice:selectedChoice,amount:selectedAmount,status:"PENDING"});save();$("#pickHint").textContent=`Placed: ${selectedChoice} • ${selectedAmount} coins`;refresh()}
+function place(){const u=me(),p=periodAt();if(!selectedChoice)return $("#pickHint").textContent="First choose a prediction.";if(db.predictions.some(x=>x.username===u.username&&x.period===p&&x.status==="PENDING"))return $("#pickHint").textContent="You already predicted in this period.";if(u.coins<selectedAmount)return $("#pickHint").textContent="Not enough coins.";u.coins-=selectedAmount;db.predictions.unshift({id:Date.now(),username:u.username,period:p,choice:selectedChoice,amount:selectedAmount,status:"PENDING"});save();$("#pickHint").textContent=`Placed: ${selectedChoice} • ${selectedAmount} coins`;refresh()}
 function changeCoins(v,title,text){const u=me();u.coins=Math.max(0,u.coins+v);save();refresh();modal(v>=0?"🎉":"💥",title,`${text} • ${v>=0?"+":""}${v} coins`,v>=0?"#22c55e":"#ef4444")}
 let miniRounds=0,zoomStake=10,zoomScale=1,zoomActive=false;
 function finishMini(winAmount,lossAmount,title,detail,forceWin){miniRounds++;/* Non-Wingo mini-game result schedule: 2 wins per 7 completed rounds. Gameplay must finish before this runs. */const slot=((miniRounds-1)%7)+1;const winRound=(slot===3||slot===7);const delta=winRound?winAmount:-lossAmount;changeCoins(delta,winRound?title+" WIN":title+" LOSS",detail+" • Mini-game round "+slot+"/7 • "+(winRound?"scheduled WIN":"scheduled LOSS"))}
@@ -266,9 +251,6 @@ $("#loginBtn").onclick=()=>{const u=$("#loginUser").value.trim(),p=$("#loginPass
 $("#logoutBtn").onclick=()=>{db.currentUser=null;save();openAuth()}
 $$(".choice").forEach(b=>b.onclick=()=>{$$(".choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedChoice=b.dataset.choice;$("#pickHint").textContent="Selected "+selectedChoice})
 $(".amount").forEach(b=>b.onclick=()=>{$(".amount").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedAmount=Number(b.dataset.amount)})
-$("[data-quick-amount]").forEach(b=>b.onclick=()=>{selectedAmount=Number(b.dataset.quickAmount);$("#customAmount").value="";$(".amount").forEach(x=>x.classList.remove("active"));$("[data-quick-amount]").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#pickHint").textContent="Selected prediction amount: "+selectedAmount+" coins."});
-$("#customAmount").addEventListener("input",()=>{const n=Number($("#customAmount").value);if(Number.isInteger(n)&&n>0){selectedAmount=n;$(".amount").forEach(x=>x.classList.remove("active"));$("[data-quick-amount]").forEach(x=>x.classList.remove("active"));$("#pickHint").textContent="Custom amount selected: "+n+" coins."}});
-
 $("#predictBtn").onclick=place;$$("[data-game]").forEach(b=>b.onclick=()=>play(b.dataset.game));$("#modalClose").onclick=()=>$("#modal").classList.add("hidden")
 $("#telegramBtn").onclick=()=>window.open("https://t.me/noidatrade","_blank")
 $("#refBtn").onclick=()=>{const u=me();$("#refText").textContent="Your referral code: NT-"+hash(u.username).toString(36).toUpperCase()}
