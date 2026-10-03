@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>NoidaTrade</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#070707">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NoidaTrade">
+<link rel="apple-touch-icon" href="./icon.svg">
 <style>
 :root{--bg:#070707;--card:#121212;--gold:#f6c453;--gold2:#ff9f1c;--text:#f5f5f5;--muted:#9d9d9d;--red:#ef4444;--green:#22c55e;--violet:#a855f7;--blue:#3b82f6;--border:rgba(246,196,83,.2)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,rgba(246,196,83,.09),transparent 30%),#070707;color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
@@ -25,7 +31,12 @@ button,input{font:inherit}.hidden{display:none!important}.wrap{width:min(1120px,
 table{width:100%;border-collapse:collapse;min-width:540px}.tablewrap{overflow:auto}th,td{padding:11px 8px;border-bottom:1px solid #272727;text-align:left;font-size:13px}th{color:var(--gold)}.win{color:var(--green);font-weight:900}.loss{color:var(--red);font-weight:900}.pending{color:var(--gold);font-weight:900}
 .auth{min-height:100vh;display:grid;place-items:center;padding:20px}.authcard{width:min(450px,100%)}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.tab{padding:11px;border-radius:12px;border:1px solid var(--border);background:#171717;color:white}.tab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;font-weight:900}
 .field{margin-bottom:12px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.field input{width:100%;padding:13px;border-radius:11px;border:1px solid #333;background:#141414;color:white;outline:0}.field input:focus{border-color:var(--gold)}
-.msg{min-height:20px;color:#ff8d8d;font-size:13px;margin-top:8px}.modal{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.78);display:grid;place-items:center;padding:20px}.modal .card{width:min(420px,100%);text-align:center}.modal h3{font-size:30px;margin:8px}.modal .icon{font-size:50px}.footer{text-align:center;color:#777;font-size:12px;padding:18px}
+.msg{min-height:20px;color:#ff8d8d;font-size:13px;margin-top:8px}.modal{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.78);display:grid;place-items:center;padding:20px}.modal .card{width:min(420px,100%);text-align:center}.modal h3{font-size:30px;margin:8px}.modal .icon{font-size:50px}.footer{text-align:center;color:#777;font-size:12px;padding:18px 18px 100px}
+/* App-style navigation and install prompt */
+.install-btn{border:1px solid #f6c453!important;color:#f6c453!important;background:#17130a!important;font-weight:800}
+.bottom-nav{display:none}
+.install-help{color:#ddd;text-align:left;font-size:14px;line-height:1.55;margin:14px 0}
+@media(max-width:700px){body{padding-bottom:78px}.bottom-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;left:0;right:0;bottom:0;z-index:1200;padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:rgba(8,8,8,.97);border-top:1px solid rgba(246,196,83,.25);backdrop-filter:blur(14px)}.bottom-nav button{border:0;background:transparent;color:#a7a7a7;border-radius:12px;padding:7px 2px;font-size:11px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px}.bottom-nav button span{font-size:20px}.bottom-nav button.active{color:#f6c453;background:rgba(246,196,83,.08)}.topin{padding-bottom:10px!important}.footer{padding-bottom:20px}}
 @media(max-width:900px){.two{grid-template-columns:1fr}.games{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.choices{grid-template-columns:repeat(2,1fr)}.choices .violet{grid-column:span 2}.amounts{grid-template-columns:repeat(3,1fr)}.games{grid-template-columns:1fr}.card{padding:14px}.logo{font-size:18px}}
 
 .zoom-fixed{width:100%;max-width:360px;margin:0 auto;min-height:340px;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}.zoom-fixed .zoom-stage{flex:0 0 150px;height:150px;min-height:150px}.zoom-fixed .zoom-controls{min-height:48px}.zoom-fixed #gameStatus{min-height:38px;text-align:center;padding:8px 2px}.zoom-fixed #gameGo{align-self:center;min-width:150px}.zoom-fixed .zoom-controls button{min-width:110px}
@@ -131,15 +142,15 @@ body{width:100%;max-width:100%;overflow-x:hidden}
 <div id="app" class="hidden">
   <div class="top"><div class="wrap topin">
     <div class="logo">NoidaTrade</div>
-    <div class="actions"><div class="pill">👤 <span id="topUser">-</span></div><div class="pill">🪙 <span id="topCoins">0</span></div><button id="logoutBtn" class="btn">Logout</button></div>
+    <div class="actions"><div class="pill">👤 <span id="topUser">-</span></div><div class="pill">🪙 <span id="topCoins">0</span></div><button id="installBtn" class="btn install-btn">＋ Install App</button><button id="logoutBtn" class="btn">Logout</button></div>
   </div></div>
 
-  <section class="hero"><div class="wrap grid two">
+  <section class="hero" id="homeSection"><div class="wrap grid two">
     <div class="card"><div class="kicker">NOIDATRADE POINTS ARENA</div><h1>Fast rounds.<br>VIP dark look.</h1><div class="muted">Virtual coins only. Choose a color or size before the timer ends.</div></div>
     <div class="card"><div class="muted">Available Coins</div><div class="coins">🪙 <span id="walletCoins">0</span></div><div class="muted">No cash value.</div></div>
   </div></section>
 
-  <section class="section"><div class="wrap grid two">
+  <section class="section" id="playSection"><div class="wrap grid two">
     <div class="card">
       <div class="roundhead"><div class="box"><span class="muted">Period</span><b id="periodText">-</b></div><div class="box"><span class="muted">Closes In</span><b id="timerText" class="timer">00:00</b></div></div>
       <div class="choices">
@@ -169,16 +180,16 @@ body{width:100%;max-width:100%;overflow-x:hidden}
     </div>
   </div></section>
 
-  <section class="section"><div class="wrap grid two">
+  <section class="section" id="historySection"><div class="wrap grid two">
     <div class="card"><div class="title"><h2>Result History</h2></div><div class="tablewrap"><table><thead><tr><th>Period</th><th>No.</th><th>Color</th><th>Size</th></tr></thead><tbody id="historyBody"></tbody></table></div></div>
     <div class="card"><div class="title"><h2>My Predictions</h2></div><div class="tablewrap"><table><thead><tr><th>Period</th><th>Pick</th><th>Amount</th><th>Status</th></tr></thead><tbody id="predBody"></tbody></table></div></div>
   </div></section>
 
-  <section class="section"><div class="wrap card"><div class="title"><h2>Support & Promotion</h2></div><div class="actions"><button id="telegramBtn" class="btn gold">Join Telegram</button><button id="refBtn" class="btn">My Referral Code</button></div><div id="refText" class="muted" style="margin-top:10px"></div></div></section>
-  <div class="footer">NoidaTrade • virtual points entertainment only • no deposits or withdrawals</div>
+  <section class="section" id="supportSection"><div class="wrap card"><div class="title"><h2>Support & Promotion</h2></div><div class="actions"><button id="telegramBtn" class="btn gold">Join Telegram</button><button id="refBtn" class="btn">My Referral Code</button></div><div id="refText" class="muted" style="margin-top:10px"></div></div></section>
+  <div class="footer">NoidaTrade • virtual points entertainment only • no deposits or withdrawals<br><button id="footerInstallBtn" class="btn install-btn" style="margin-top:10px">＋ Install NoidaTrade</button></div>
 </div>
 
-<div id="modal" class="modal hidden"><div class="card"><div id="modalIcon" class="icon">🎉</div><h3 id="modalTitle">Result</h3><div id="modalText" class="muted"></div><button id="modalClose" class="btn gold" style="margin-top:16px">OK</button></div></div>
+<nav class="bottom-nav" id="bottomNav" aria-label="Main navigation"><button data-nav="homeSection" class="active"><span>⌂</span>Home</button><button data-nav="playSection"><span>◉</span>Trade</button><button data-nav="gamesSection"><span>🎮</span>Games</button><button data-nav="historySection"><span>▤</span>History</button></nav>\n<div id="modal" class="modal hidden"><div class="card"><div id="modalIcon" class="icon">🎉</div><h3 id="modalTitle">Result</h3><div id="modalText" class="muted"></div><button id="modalClose" class="btn gold" style="margin-top:16px">OK</button></div></div>
 
 <script>
 const DB_KEY="NOIDATRADE_LOCAL_DATABASE_V2";
@@ -253,7 +264,7 @@ $("#logoutBtn").onclick=()=>{db.currentUser=null;save();openAuth()}
 $$(".choice").forEach(b=>b.onclick=()=>{$$(".choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedChoice=b.dataset.choice;$("#pickHint").textContent="Selected "+selectedChoice})
 $$(".amount").forEach(b=>b.onclick=()=>{$$(".amount").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedAmount=Number(b.dataset.amount)})
 $("#predictBtn").onclick=place;$$("[data-game]").forEach(b=>b.onclick=()=>play(b.dataset.game));$("#modalClose").onclick=()=>$("#modal").classList.add("hidden")
-$("#telegramBtn").onclick=()=>window.open("https://t.me/noidatrade","_blank")
+$("#telegramBtn").onclick=()=>window.open("https://t.me/noidatrade","_blank")\n\n// Installable app support (Android/desktop prompt + iPhone Home Screen instructions)\nlet deferredInstallPrompt=null;\nconst installHelp=()=>{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);modal("📲","Install NoidaTrade",ios?"<div class=\\"install-help\\"><b>iPhone / iPad:</b><br>1. Open this website in Safari.<br>2. Tap the Share button (square with arrow ↑).<br>3. Choose <b>Add to Home Screen</b>.<br>4. Tap <b>Add</b>. No .html link or download is needed.</div>":"<div class=\\"install-help\\"><b>Install the app:</b><br>Tap <b>Install</b> if your browser offers it. If not, open the browser menu and choose <b>Add to Home Screen</b> or <b>Install app</b>.</div>");if(deferredInstallPrompt){const b=document.createElement("button");b.className="btn gold";b.textContent="Install";b.style.marginTop="10px";b.onclick=async()=>{deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;$("#modal").classList.add("hidden")};$("#modalText").appendChild(b)}};\nwindow.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstallPrompt=e});\n["installBtn","footerInstallBtn"].forEach(id=>{const el=$("#"+id);if(el)el.onclick=installHelp});\n$("[data-nav]").forEach(b=>b.onclick=()=>{const target=document.getElementById(b.dataset.nav);if(target){target.scrollIntoView({behavior:"smooth",block:"start"});$("[data-nav]").forEach(x=>x.classList.toggle("active",x===b))}});\nif("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 $("#refBtn").onclick=()=>{const u=me();$("#refText").textContent="Your referral code: NT-"+hash(u.username).toString(36).toUpperCase()}
 db.currentUser=null;save();openAuth();setInterval(tick,500);tick();settle();
 </script>
