@@ -19,7 +19,7 @@ button,input{font:inherit}.hidden{display:none!important}.wrap{width:min(1120px,
 .topin{display:flex;justify-content:space-between;align-items:center;padding:14px 0;gap:10px}.logo{font-size:22px;font-weight:900;background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;color:transparent}
 .actions{display:flex;gap:8px;flex-wrap:wrap}.pill,.btn{border:1px solid var(--border);background:#171717;color:white;border-radius:12px;padding:9px 12px}.btn.gold{border:0;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;font-weight:900}
 .hero{padding:24px 0}.grid{display:grid;gap:14px}.two{grid-template-columns:1.2fr .8fr}.card{background:linear-gradient(180deg,rgba(26,26,26,.96),rgba(14,14,14,.96));border:1px solid var(--border);border-radius:20px;box-shadow:0 15px 35px rgba(0,0,0,.35);padding:18px}
-.kicker{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:1.5px}.hero h1{font-size:clamp(30px,6vw,52px);margin:8px 0 10px}.muted{color:var(--muted);font-size:13px}.coins{font-size:36px;color:var(--gold);font-weight:900;margin-top:8px}
+.kicker{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:1.5px}.hero h1{font-size:clamp(30px,6vw,52px);margin:8px 0 10px}.muted{color:var(--muted);font-size:13px}.balance{font-size:36px;color:var(--gold);font-weight:900;margin-top:8px}
 .roundhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.box{background:#181818;border:1px solid #292929;padding:12px;border-radius:14px}.box b{display:block;margin-top:4px}.timer{font-size:28px;color:var(--gold)}
 .choices{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:16px 0}.choice{border:0;color:white;font-weight:900;padding:13px 5px;border-radius:13px}.choice.active{outline:2px solid white;box-shadow:0 0 0 4px rgba(255,255,255,.08)}
 .red{background:#dc2626}.green{background:#16a34a}.violet{background:#9333ea}.big{background:#2563eb}.small{background:#475569}
@@ -133,7 +133,7 @@ body{width:100%;max-width:100%;overflow-x:hidden}
       <div class="field"><label>Username</label><input id="signupUser" placeholder="Choose username"></div>
       <div class="field"><label>Password</label><input id="signupPass" type="password" placeholder="Choose password"></div>
       <div class="field"><label>Confirm Password</label><input id="signupPass2" type="password" placeholder="Repeat password"></div>
-      <button id="signupBtn" class="btn gold" style="width:100%">Create Account + 1000 Coins</button>
+      <button id="signupBtn" class="btn gold" style="width:100%">Create Account + 1000 Balance</button>
     </div>
     <div id="authMsg" class="msg"></div>
   </div>
@@ -142,12 +142,12 @@ body{width:100%;max-width:100%;overflow-x:hidden}
 <div id="app" class="hidden">
   <div class="top"><div class="wrap topin">
     <div class="logo">NoidaTrade</div>
-    <div class="actions"><div class="pill">👤 <span id="topUser">-</span></div><div class="pill">🪙 <span id="topCoins">0</span></div><button id="installBtn" class="btn install-btn">＋ Install App</button><button id="logoutBtn" class="btn">Logout</button></div>
+    <div class="actions"><div class="pill">👤 <span id="topUser">-</span></div><div class="pill">₹ <span id="topBalance">0</span></div><button id="installBtn" class="btn install-btn">＋ Install App</button><button id="logoutBtn" class="btn">Logout</button></div>
   </div></div>
 
   <section class="hero" id="homeSection"><div class="wrap grid two">
-    <div class="card"><div class="kicker">NOIDATRADE POINTS ARENA</div><h1>Fast rounds.<br>VIP dark look.</h1><div class="muted">Virtual coins only. Choose a color or size before the timer ends.</div></div>
-    <div class="card"><div class="muted">Available Coins</div><div class="coins">🪙 <span id="walletCoins">0</span></div><div class="muted">No cash value.</div></div>
+    <div class="card"><div class="kicker">NOIDATRADE POINTS ARENA</div><h1>Fast rounds.<br>VIP dark look.</h1><div class="muted">Virtual balance only. Choose a color or size before the timer ends.</div></div>
+    <div class="card"><div class="muted">Available Balance</div><div class="balance">₹ <span id="walletBalance">0</span></div><div class="muted">No cash value.</div></div>
   </div></section>
 
   <section class="section" id="playSection"><div class="wrap grid two">
@@ -166,7 +166,7 @@ body{width:100%;max-width:100%;overflow-x:hidden}
   </div></section>
 
   <section class="section" id="gamesSection"><div class="wrap">
-    <div class="title"><h2>Mini Games</h2><span class="muted">Virtual coins only</span></div>
+    <div class="title"><h2>Mini Games</h2><span class="muted">Virtual balance only</span></div>
     <div class="grid games">
       <div class="card mini"><div><h3>⚡ Number Rush</h3><div class="muted">Quick number challenge.</div></div><button data-game="number">Play</button></div>
       <div class="card mini"><div><h3>🎲 Lucky Dice</h3><div class="muted">Roll the dice.</div></div><button data-game="dice">Play</button></div>
@@ -176,7 +176,7 @@ body{width:100%;max-width:100%;overflow-x:hidden}
       <div class="card mini"><div><h3>🃏 Memory Match</h3><div class="muted">Guess the hidden pair.</div></div><button data-game="memory">Play</button></div>
       <div class="card mini"><div><h3>🚀 Rocket Boost</h3><div class="muted">Points-only rocket game.</div></div><button data-game="rocket">Launch</button></div>
       <div class="card mini"><div><h3>🏆 High Score</h3><div class="muted">Beat the target.</div></div><button data-game="score">Play</button></div>
-      <div class="card mini zoom-game"><div><h3>🔎 Zoom In / Zoom Out</h3><div class="muted">Fixed play area • choose 10 or 20 coins.</div></div><button data-game="zoom">Play</button></div>
+      <div class="card mini zoom-game"><div><h3>🔎 Zoom In / Zoom Out</h3><div class="muted">Fixed play area • choose 10 or 20 balance.</div></div><button data-game="zoom">Play</button></div>
     </div>
   </div></section>
 
@@ -208,17 +208,17 @@ function win(p,r){return["Red","Green","Violet"].includes(p.choice)?p.choice===r
 function authMsg(t,ok=false){$("#authMsg").textContent=t;$("#authMsg").style.color=ok?"#61e294":"#ff8d8d"}
 function openApp(){$("#auth").classList.add("hidden");$("#app").classList.remove("hidden");refresh()}
 function openAuth(){$("#app").classList.add("hidden");$("#auth").classList.remove("hidden")}
-function refresh(){const u=me();if(!u)return;$("#topUser").textContent=u.username;$("#topCoins").textContent=u.coins;$("#walletCoins").textContent=u.coins;renderHistory();renderPredictions()}
+function refresh(){const u=me();if(!u)return;$("#topUser").textContent=u.username;$("#topBalance").textContent=u.balance;$("#walletBalance").textContent=u.balance;renderHistory();renderPredictions()}
 function renderHistory(){const rows=[...db.rounds].sort((a,b)=>b.period.localeCompare(a.period)).slice(0,12);$("#historyBody").innerHTML=rows.length?rows.map(r=>`<tr><td>${r.period}</td><td>${r.number}</td><td>${r.color}</td><td>${r.size}</td></tr>`).join(""):`<tr><td colspan="4" class="muted">No completed rounds yet.</td></tr>`}
 function renderPredictions(){const u=me();if(!u)return;const rows=db.predictions.filter(p=>p.username===u.username).slice(0,15);$("#predBody").innerHTML=rows.length?rows.map(p=>`<tr><td>${p.period}</td><td>${p.choice}</td><td>${p.amount}</td><td class="${p.status==="WIN"?"win":p.status==="LOST"?"loss":"pending"}">${p.status}</td></tr>`).join(""):`<tr><td colspan="4" class="muted">No predictions yet.</td></tr>`}
 function showLatest(r){$("#latestNum").textContent=r.number;$("#latestColor").textContent="Color "+r.color;$("#latestSize").textContent="Size "+r.size;$("#latestNum").style.color=r.color==="Red"?"#ef4444":r.color==="Green"?"#22c55e":"#a855f7"}
 function modal(icon,title,text,color){$("#modalIcon").textContent=icon;$("#modalTitle").textContent=title;$("#modalTitle").style.color=color||"#f6c453";$("#modalText").innerHTML=text;$("#modal").classList.remove("hidden")}
-function settle(){const current=periodAt(),u=me();if(!u)return;for(const p of db.predictions.filter(x=>x.username===u.username&&x.status==="PENDING"&&x.period!==current)){const r=ensureRound(p.period),ok=win(p,r);p.status=ok?"WIN":"LOST";if(ok)u.coins+=p.amount*2;save();modal(ok?"🏆":"💥",ok?"WIN":"LOSS",`Period ${p.period} • Result ${r.number}/${r.color}/${r.size} • ${ok?`+${p.amount} net coins`:`-${p.amount} coins`}`,ok?"#22c55e":"#ef4444")}refresh()}
+function settle(){const current=periodAt(),u=me();if(!u)return;for(const p of db.predictions.filter(x=>x.username===u.username&&x.status==="PENDING"&&x.period!==current)){const r=ensureRound(p.period),ok=win(p,r);p.status=ok?"WIN":"LOST";if(ok)u.balance+=p.amount*2;save();modal(ok?"🏆":"💥",ok?"WIN":"LOSS",`Period ${p.period} • Result ${r.number}/${r.color}/${r.size} • ${ok?`+${p.amount} net balance`:`-${p.amount} balance`}`,ok?"#22c55e":"#ef4444")}refresh()}
 function tick(){const now=Date.now(),p=periodAt(now),left=60-(Math.floor(now/1000)%60);$("#periodText").textContent=p;$("#timerText").textContent=`00:${String(left).padStart(2,"0")}`;if(lastPeriod&&lastPeriod!==p){ensureRound(lastPeriod);settle()}lastPeriod=p;showLatest(ensureRound(periodAt(now-60000)))}
-function place(){const u=me(),p=periodAt();if(!selectedChoice)return $("#pickHint").textContent="First choose a prediction.";if(db.predictions.some(x=>x.username===u.username&&x.period===p&&x.status==="PENDING"))return $("#pickHint").textContent="You already predicted in this period.";if(u.coins<selectedAmount)return $("#pickHint").textContent="Not enough coins.";u.coins-=selectedAmount;db.predictions.unshift({id:Date.now(),username:u.username,period:p,choice:selectedChoice,amount:selectedAmount,status:"PENDING"});save();$("#pickHint").textContent=`Placed: ${selectedChoice} • ${selectedAmount} coins`;refresh()}
-function changeCoins(v,title,text){const u=me();u.coins=Math.max(0,u.coins+v);save();refresh();modal(v>=0?"🎉":"💥",title,`${text} • ${v>=0?"+":""}${v} coins`,v>=0?"#22c55e":"#ef4444")}
+function place(){const u=me(),p=periodAt();if(!selectedChoice)return $("#pickHint").textContent="First choose a prediction.";if(db.predictions.some(x=>x.username===u.username&&x.period===p&&x.status==="PENDING"))return $("#pickHint").textContent="You already predicted in this period.";if(u.balance<selectedAmount)return $("#pickHint").textContent="Not enough balance.";u.balance-=selectedAmount;db.predictions.unshift({id:Date.now(),username:u.username,period:p,choice:selectedChoice,amount:selectedAmount,status:"PENDING"});save();$("#pickHint").textContent=`Placed: ${selectedChoice} • ${selectedAmount} balance`;refresh()}
+function changeBalance(v,title,text){const u=me();u.balance=Math.max(0,u.balance+v);save();refresh();modal(v>=0?"🎉":"💥",title,`${text} • ${v>=0?"+":""}${v} balance`,v>=0?"#22c55e":"#ef4444")}
 let miniRounds=0,zoomStake=10,zoomScale=1,zoomActive=false;
-function finishMini(winAmount,lossAmount,title,detail,forceWin){miniRounds++;/* Non-Wingo mini-game result schedule: 2 wins per 7 completed rounds. Gameplay must finish before this runs. */const slot=((miniRounds-1)%7)+1;const winRound=(slot===3||slot===7);const delta=winRound?winAmount:-lossAmount;changeCoins(delta,winRound?title+" WIN":title+" LOSS",detail+" • Mini-game round "+slot+"/7 • "+(winRound?"scheduled WIN":"scheduled LOSS"))}
+function finishMini(winAmount,lossAmount,title,detail,forceWin){miniRounds++;/* Non-Wingo mini-game result schedule: 2 wins per 7 completed rounds. Gameplay must finish before this runs. */const slot=((miniRounds-1)%7)+1;const winRound=(slot===3||slot===7);const delta=winRound?winAmount:-lossAmount;changeBalance(delta,winRound?title+" WIN":title+" LOSS",detail+" • Mini-game round "+slot+"/7 • "+(winRound?"scheduled WIN":"scheduled LOSS"))}
 function gamePanel(g){
  const labels={number:"⚡ Number Rush",dice:"🎲 Lucky Dice",wheel:"🎡 Lucky Wheel",math:"🧠 Quick Math",tap:"👆 Speed Tap",memory:"🃏 Memory Match",rocket:"🚀 Rocket Boost",score:"🏆 High Score",zoom:"🔎 Zoom In / Zoom Out"};
  let body="";
@@ -230,7 +230,7 @@ function gamePanel(g){
  else if(g==="memory"){const same=Math.random()<.5;body=`Reveal the two cards and check whether they match.<div class="zoom-controls"><button data-card="0">❔ Card 1</button><button data-card="1">❔ Card 2</button></div><div id="gameStatus" class="muted">Reveal both cards.</div><button class="game-action" id="gameGo" disabled>Finish round</button>`;miniState={g,same,revealed:[]}}
  else if(g==="rocket"){body=`Launch the rocket, then choose when to cash out before it crashes.<div class="zoom-stage"><div id="rocketVisual" class="zoom-target">🚀</div></div><div id="gameStatus" class="muted">Ready to launch.</div><button class="game-action" id="gameGo">Launch</button><button class="game-action" id="cashOut" disabled>Cash out</button>`;miniState={g,launched:false,crashed:false}}
  else if(g==="score"){const target=55+Math.floor(Math.random()*36);body=`Tap the button to build your score. Target: <b>${target}</b><div id="scoreNum" style="font-size:28px;margin:12px">0</div><button class="game-action" id="scoreTap">TAP TO SCORE</button><button class="game-action" id="gameGo">Submit score</button><div id="gameStatus" class="muted">Score as high as you can.</div>`;miniState={g,target,score:0}}
- else if(g==="zoom"){zoomStake=10;zoomScale=1;zoomActive=false;body=`<div class="zoom-fixed"><div class="zoom-controls"><button data-stake="10">10 coins</button><button data-stake="20">20 coins</button></div><div id="zoomStakeLabel" class="muted">Stake: 10 coins</div><div class="zoom-stage"><div id="zoomTarget" class="zoom-target">🔍</div></div><div class="zoom-controls"><button id="zoomIn">＋ ZOOM IN</button><button id="zoomOut">－ ZOOM OUT</button></div><div id="gameStatus" class="muted">Choose stake, then press Start round.</div><button class="game-action" id="gameGo">Start round</button></div>`;miniState={g,steps:0,goal:Math.random()<.5?"in":"out"}}
+ else if(g==="zoom"){zoomStake=10;zoomScale=1;zoomActive=false;body=`<div class="zoom-fixed"><div class="zoom-controls"><button data-stake="10">10 balance</button><button data-stake="20">20 balance</button></div><div id="zoomStakeLabel" class="muted">Stake: 10 balance</div><div class="zoom-stage"><div id="zoomTarget" class="zoom-target">🔍</div></div><div class="zoom-controls"><button id="zoomIn">＋ ZOOM IN</button><button id="zoomOut">－ ZOOM OUT</button></div><div id="gameStatus" class="muted">Choose stake, then press Start round.</div><button class="game-action" id="gameGo">Start round</button></div>`;miniState={g,steps:0,goal:Math.random()<.5?"in":"out"}}
  $("#modalIcon").textContent="🎮";$("#modalTitle").textContent=labels[g]||"Mini Game";$("#modalTitle").style.color="#f6c453";$("#modalText").innerHTML=body;$("#modal").classList.remove("hidden");wireMini(g)
 }
 let miniState={g:null};
@@ -239,8 +239,8 @@ function wireMini(g){
  $$("[data-pick]").forEach(b=>b.onclick=()=>{miniState.pick=b.dataset.pick;$$("[data-pick]").forEach(x=>x.style.outline=x===b?"2px solid #f6c453":"none");if(status())status().textContent="Selected: "+b.textContent;const go=$("#gameGo");if(go)go.disabled=false});
  $$("[data-card]").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.card);if(miniState.revealed.includes(i))return;miniState.revealed.push(i);b.textContent=(miniState.same?(i===0?"🍒":"🍒"):(i===0?"🍒":"🍋"));if(status())status().textContent=miniState.revealed.length===2?"Both cards revealed.":"Reveal the other card.";if(miniState.revealed.length===2)$("#gameGo").disabled=false});
  if(g==="zoom"){
- $$("[data-stake]").forEach(b=>b.onclick=()=>{zoomStake=Number(b.dataset.stake);$("#zoomStakeLabel").textContent="Stake: "+zoomStake+" coins";$$("[data-stake]").forEach(x=>x.style.outline=x===b?"2px solid #f6c453":"none")});
- $("#gameGo").onclick=()=>{if(me().coins<zoomStake){status().textContent="Not enough virtual coins.";return}zoomActive=true;miniState.steps=0;miniState.lastDirection=null;zoomScale=1;$("#zoomTarget").style.transform="scale(1)";$("#zoomTarget").textContent="🔍";status().textContent="Round goal: "+(miniState.goal==="in"?"ZOOM IN":"ZOOM OUT")+" • make 3 moves.";$("#gameGo").disabled=true;$("[data-stake]").forEach(x=>x.disabled=true);$("#zoomIn").disabled=false;$("#zoomOut").disabled=false};
+ $$("[data-stake]").forEach(b=>b.onclick=()=>{zoomStake=Number(b.dataset.stake);$("#zoomStakeLabel").textContent="Stake: "+zoomStake+" balance";$$("[data-stake]").forEach(x=>x.style.outline=x===b?"2px solid #f6c453":"none")});
+ $("#gameGo").onclick=()=>{if(me().balance<zoomStake){status().textContent="Not enough virtual balance.";return}zoomActive=true;miniState.steps=0;miniState.lastDirection=null;zoomScale=1;$("#zoomTarget").style.transform="scale(1)";$("#zoomTarget").textContent="🔍";status().textContent="Round goal: "+(miniState.goal==="in"?"ZOOM IN":"ZOOM OUT")+" • make 3 moves.";$("#gameGo").disabled=true;$("[data-stake]").forEach(x=>x.disabled=true);$("#zoomIn").disabled=false;$("#zoomOut").disabled=false};
  ["zoomIn","zoomOut"].forEach(id=>$("#"+id).onclick=()=>{if(!zoomActive)return;const direction=id==="zoomIn"?"in":"out";miniState.steps++;zoomScale=Math.max(.35,Math.min(2.5,zoomScale+(direction==="in"?.25:-.25)));$("#zoomTarget").style.transform="scale("+zoomScale+")";status().textContent="Move "+miniState.steps+" of 3 • "+(direction==="in"?"Zoomed in":"Zoomed out");miniState.lastDirection=direction;if(miniState.steps>=3){zoomActive=false;$("#zoomIn").disabled=true;$("#zoomOut").disabled=true;$("[data-stake]").forEach(x=>x.disabled=false);$("#gameGo").disabled=false;$("#gameGo").textContent="Play again";const won=miniState.lastDirection===miniState.goal;status().textContent="Round complete • "+(won?"WIN":"LOSS");finishMini(zoomStake,zoomStake,"Zoom In / Zoom Out",won?"You completed the zoom challenge.":"The final move did not match the round goal.",won);}});$("#zoomIn").disabled=true;$("#zoomOut").disabled=true;
  }
  if(g==="tap")$("#tapTarget").onclick=()=>{const ms=Date.now()-miniState.started;$("#tapTarget").disabled=true;finishMini(35,10,"Speed Tap",`Reaction time ${ms} ms.`,ms<650)};
@@ -259,7 +259,7 @@ function wireMini(g){
 function play(g){gamePanel(g)}
 $("#loginTab").onclick=()=>{$("#loginTab").classList.add("active");$("#signupTab").classList.remove("active");$("#loginBox").classList.remove("hidden");$("#signupBox").classList.add("hidden");authMsg("")}
 $("#signupTab").onclick=()=>{$("#signupTab").classList.add("active");$("#loginTab").classList.remove("active");$("#signupBox").classList.remove("hidden");$("#loginBox").classList.add("hidden");authMsg("")}
-$("#signupBtn").onclick=()=>{const u=$("#signupUser").value.trim(),p=$("#signupPass").value,p2=$("#signupPass2").value;if(u.length<3)return authMsg("Username minimum 3 characters.");if(p.length<4)return authMsg("Password minimum 4 characters.");if(p!==p2)return authMsg("Passwords do not match.");if(db.users.some(x=>x.username.toLowerCase()===u.toLowerCase()))return authMsg("Username already exists.");db.users.push({username:u,password:p,coins:1000,createdAt:Date.now()});db.currentUser=u;save();openApp()}
+$("#signupBtn").onclick=()=>{const u=$("#signupUser").value.trim(),p=$("#signupPass").value,p2=$("#signupPass2").value;if(u.length<3)return authMsg("Username minimum 3 characters.");if(p.length<4)return authMsg("Password minimum 4 characters.");if(p!==p2)return authMsg("Passwords do not match.");if(db.users.some(x=>x.username.toLowerCase()===u.toLowerCase()))return authMsg("Username already exists.");db.users.push({username:u,password:p,balance:1000,createdAt:Date.now()});db.currentUser=u;save();openApp()}
 $("#loginBtn").onclick=()=>{const u=$("#loginUser").value.trim(),p=$("#loginPass").value,f=db.users.find(x=>x.username.toLowerCase()===u.toLowerCase()&&x.password===p);if(!f)return authMsg("Wrong username or password.");db.currentUser=f.username;save();openApp()}
 $("#logoutBtn").onclick=()=>{db.currentUser=null;save();openAuth()}
 $$(".choice").forEach(b=>b.onclick=()=>{$$(".choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedChoice=b.dataset.choice;$("#pickHint").textContent="Selected "+selectedChoice})
