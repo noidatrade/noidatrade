@@ -12,7 +12,7 @@
 <section id="login" class="card">
 <h1>🔐 NoidaTrade Admin</h1><p class="muted">Admin access only</p>
 <div class="notice">This page is hosted in the public website repository. The browser lock is only a basic gate, not real server-side privacy. Do not enter real user passwords or secrets here.</div>
-<label for="pass">Admin passcode</label><input id="pass" type="password" autocomplete="current-password" placeholder="Enter passcode">
+<label for="adminId">Admin ID</label><input id="adminId" autocomplete="username" placeholder="Admin"><label for="pass">Admin password</label><input id="pass" type="password" autocomplete="current-password" placeholder="Enter password">
 <div class="row"><button id="unlock">Unlock panel</button></div><p id="err" class="muted"></p>
 </section>
 <div id="panel" class="hidden">
@@ -29,7 +29,7 @@
 /* Change this local passcode before use. This client-side gate is not secure access control. */
 const ADMIN_PASSCODE="NT-Admin-ChangeMe-2026";
 const $=s=>document.querySelector(s);
-$("#unlock").onclick=()=>{if($("#pass").value===ADMIN_PASSCODE){sessionStorage.setItem("nt-admin-unlocked","1");$("#login").classList.add("hidden");$("#panel").classList.remove("hidden");render()}else $("#err").textContent="Incorrect passcode."};
+$("#unlock").onclick=()=>{if($("#adminId").value.trim()==="Admin" && $("#pass").value===ADMIN_PASSCODE){sessionStorage.setItem("nt-admin-unlocked","1");$("#login").classList.add("hidden");$("#panel").classList.remove("hidden");render()}else $("#err").textContent="Incorrect passcode."};
 $("#pass").addEventListener("keydown",e=>{if(e.key==="Enter")$("#unlock").click()});
 function getDb(){for(const key of ["noidatrade_db","NoidaTradeDB","noidatrade","nt_db","db"]){try{const raw=localStorage.getItem(key);if(raw){const val=JSON.parse(raw);if(val&&typeof val==="object")return {key,val}}}catch{}}return {key:null,val:{}}}
 function getUsers(db){const v=db.val;const a=v.users||v.accounts||v.userList||[];if(Array.isArray(a))return a;if(a&&typeof a==="object")return Object.entries(a).map(([username,x])=>typeof x==="object"?{username,...x}:{username,points:x});return []}
