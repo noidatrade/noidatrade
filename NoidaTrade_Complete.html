@@ -255,7 +255,7 @@ $$(".amount").forEach(b=>b.onclick=()=>{$$(".amount").forEach(x=>x.classList.rem
 $("#predictBtn").onclick=place;$$("[data-game]").forEach(b=>b.onclick=()=>play(b.dataset.game));$("#modalClose").onclick=()=>$("#modal").classList.add("hidden")
 $("#telegramBtn").onclick=()=>window.open("https://t.me/noidatrade","_blank")
 $("#refBtn").onclick=()=>{const u=me();$("#refText").textContent="Your referral code: NT-"+hash(u.username).toString(36).toUpperCase()}
-setInterval(tick,500);if(db.currentUser&&me())openApp();else openAuth();tick();settle();
+db.currentUser=null;save();openAuth();setInterval(tick,500);tick();settle();
 </script>
 </body>
 </html>
