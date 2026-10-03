@@ -79,6 +79,24 @@ body{width:100%;max-width:100%;overflow-x:hidden}
 @media(min-width:901px){
  .games{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+/* Keep My Predictions as one consistent responsive table */
+.two>.card:nth-child(2) .tablewrap{overflow-x:hidden}
+.two>.card:nth-child(2) table{width:100%;min-width:0;table-layout:fixed}
+.two>.card:nth-child(2) th,.two>.card:nth-child(2) td{overflow-wrap:anywhere;word-break:normal;padding-left:6px;padding-right:6px}
+.two>.card:nth-child(2) th:first-child,.two>.card:nth-child(2) td:first-child{width:43%;word-break:break-word}
+.two>.card:nth-child(2) th:nth-child(2),.two>.card:nth-child(2) td:nth-child(2){width:17%}
+.two>.card:nth-child(2) th:nth-child(3),.two>.card:nth-child(2) td:nth-child(3){width:17%}
+.two>.card:nth-child(2) th:nth-child(4),.two>.card:nth-child(2) td:nth-child(4){width:23%}
+@media(max-width:620px){
+ .two>.card:nth-child(2) .tablewrap{overflow-x:hidden}
+ .two>.card:nth-child(2) table{min-width:0;font-size:12px}
+ .two>.card:nth-child(2) th,.two>.card:nth-child(2) td{font-size:12px;padding:10px 4px}
+ .two>.card:nth-child(2) th:first-child,.two>.card:nth-child(2) td:first-child{width:40%;font-size:11px;overflow-wrap:anywhere}
+ .two>.card:nth-child(2) th:nth-child(2),.two>.card:nth-child(2) td:nth-child(2){width:17%}
+ .two>.card:nth-child(2) th:nth-child(3),.two>.card:nth-child(2) td:nth-child(3){width:18%}
+ .two>.card:nth-child(2) th:nth-child(4),.two>.card:nth-child(2) td:nth-child(4){width:25%}
+}
+
 </style>
 </head>
 <body>
