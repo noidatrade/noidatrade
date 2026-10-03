@@ -250,7 +250,7 @@ $("#signupBtn").onclick=()=>{const u=$("#signupUser").value.trim(),p=$("#signupP
 $("#loginBtn").onclick=()=>{const u=$("#loginUser").value.trim(),p=$("#loginPass").value,f=db.users.find(x=>x.username.toLowerCase()===u.toLowerCase()&&x.password===p);if(!f)return authMsg("Wrong username or password.");db.currentUser=f.username;save();openApp()}
 $("#logoutBtn").onclick=()=>{db.currentUser=null;save();openAuth()}
 $$(".choice").forEach(b=>b.onclick=()=>{$$(".choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedChoice=b.dataset.choice;$("#pickHint").textContent="Selected "+selectedChoice})
-$(".amount").forEach(b=>b.onclick=()=>{$(".amount").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedAmount=Number(b.dataset.amount)})
+$$(".amount").forEach(b=>b.onclick=()=>{$$(".amount").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedAmount=Number(b.dataset.amount)})
 $("#predictBtn").onclick=place;$$("[data-game]").forEach(b=>b.onclick=()=>play(b.dataset.game));$("#modalClose").onclick=()=>$("#modal").classList.add("hidden")
 $("#telegramBtn").onclick=()=>window.open("https://t.me/noidatrade","_blank")
 $("#refBtn").onclick=()=>{const u=me();$("#refText").textContent="Your referral code: NT-"+hash(u.username).toString(36).toUpperCase()}
