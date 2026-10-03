@@ -80,23 +80,25 @@ body{width:100%;max-width:100%;overflow-x:hidden}
  .games{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 
-/* Compact My Predictions columns so all fields are visible without horizontal swiping */
-.two>.card:nth-child(2) .tablewrap{width:100%;overflow:visible}
-.two>.card:nth-child(2) table{width:100%;min-width:0;table-layout:fixed}
-.two>.card:nth-child(2) th,.two>.card:nth-child(2) td{white-space:normal;overflow-wrap:anywhere;word-break:normal;padding:10px 5px}
-.two>.card:nth-child(2) th:first-child,.two>.card:nth-child(2) td:first-child{width:36%}
-.two>.card:nth-child(2) th:nth-child(2),.two>.card:nth-child(2) td:nth-child(2){width:18%}
-.two>.card:nth-child(2) th:nth-child(3),.two>.card:nth-child(2) td:nth-child(3){width:20%}
-.two>.card:nth-child(2) th:nth-child(4),.two>.card:nth-child(2) td:nth-child(4){width:26%}
+
+/* Result History: fit every column on screen, no sideways scrolling */
+.two>.card:first-child .tablewrap{width:100%;max-width:100%;overflow:hidden}
+.two>.card:first-child table{width:100%;min-width:0;table-layout:fixed}
+.two>.card:first-child th,.two>.card:first-child td{padding:10px 5px;white-space:normal;overflow-wrap:anywhere}
+.two>.card:first-child th:first-child,.two>.card:first-child td:first-child{width:20%;text-align:center}
+.two>.card:first-child th:nth-child(2),.two>.card:first-child td:nth-child(2){width:27%;text-align:center}
+.two>.card:first-child th:nth-child(3),.two>.card:first-child td:nth-child(3){width:26%;text-align:center}
+.two>.card:first-child th:nth-child(4),.two>.card:first-child td:nth-child(4){width:27%;text-align:center}
 @media(max-width:620px){
- .two>.card:nth-child(2){min-width:0;padding:12px}
- .two>.card:nth-child(2) .tablewrap{overflow:visible}
- .two>.card:nth-child(2) table{min-width:0;width:100%;font-size:12px;table-layout:fixed}
- .two>.card:nth-child(2) th,.two>.card:nth-child(2) td{font-size:12px;padding:10px 3px;white-space:normal;overflow-wrap:anywhere}
- .two>.card:nth-child(2) th:first-child,.two>.card:nth-child(2) td:first-child{width:36%;font-size:10px}
- .two>.card:nth-child(2) th:nth-child(2),.two>.card:nth-child(2) td:nth-child(2){width:18%}
- .two>.card:nth-child(2) th:nth-child(3),.two>.card:nth-child(2) td:nth-child(3){width:20%}
- .two>.card:nth-child(2) th:nth-child(4),.two>.card:nth-child(2) td:nth-child(4){width:26%}
+ .two>.card:first-child{min-width:0;padding:12px}
+ .two>.card:first-child .tablewrap{overflow:hidden}
+ .two>.card:first-child table{min-width:0;width:100%;table-layout:fixed;font-size:12px}
+ .two>.card:first-child th,.two>.card:first-child td{font-size:12px;padding:10px 2px;white-space:normal;overflow-wrap:anywhere}
+ .two>.card:first-child th:first-child,.two>.card:first-child td:first-child{width:18%}
+ .two>.card:first-child th:nth-child(2),.two>.card:first-child td:nth-child(2){width:27%}
+ .two>.card:first-child th:nth-child(3),.two>.card:first-child td:nth-child(3){width:27%}
+ .two>.card:first-child th:nth-child(4),.two>.card:first-child td:nth-child(4){width:28%}
+ .two>.card:first-child td:first-child{font-size:12px}
 }
 </style>
 </head>
