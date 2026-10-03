@@ -1,0 +1,19 @@
+{
+  "name": "NoidaTrade",
+  "short_name": "NoidaTrade",
+  "description": "NoidaTrade points arena and mini games",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070707",
+  "theme_color": "#070707",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
